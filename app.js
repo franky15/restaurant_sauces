@@ -15,7 +15,7 @@ const path = require('path');
 const app = express();
 
 //connection avec la base de données
-mongoose.connect(process.env.DB_CONNECTION, 
+mongoose.connect(process.env.DB_CONNECTION,  
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
@@ -31,6 +31,7 @@ res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content
 res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
 next();
 });
+
 
 
 

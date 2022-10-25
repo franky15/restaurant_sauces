@@ -4,8 +4,7 @@ const bcrypt = require("bcrypt");
 
 const jwt = require("jsonwebtoken");
 
-//protection des variables d'environnement
-require("dotenv").config();
+
 
 
 //post envoie et et hashage du mot de pass (inscription de l'utulisateur)
