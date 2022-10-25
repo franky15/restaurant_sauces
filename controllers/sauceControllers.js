@@ -20,7 +20,7 @@ exports.sauceSingle = (req, res, next) => {
         .catch(error => { res.status(404).json({ error })});
     
 };
-
+ 
 // post creation de sauce
 exports.sauceCreate = (req, res, next) => {
     const sauceObjet = JSON.parse(req.body.sauce);
@@ -56,7 +56,7 @@ exports.sauceUpdate = (req, res, next) => {
     sauceSchema.findOne({_id: req.params.id})
         .then( (sauce) => {
             if(sauce.userId != req.auth.userId){  //userId base et userId du token d'auth
-                res.status(401).json({ message: "Non autiré !"})
+                res.status(403).json({ message: "Non autiré !"})
             }else{
                 sauceSchema.updateOne({_id: req.params.id }, {...sauceObjet, _id: req.params.id})
                     .then(() => { res.status(200).json({ message: "Objet modifié !"})})
@@ -94,6 +94,7 @@ exports.likeCreate = (req, res, next) => {
     let userId = req.auth.userId;   //recupération du userId du token d'authentification envoyé par le front
     let sauceId = req.params.id;
     console.log(like) /////////
+
     if(like === 1) {
         console.log("je  likes")
         sauceSchema.updateOne({_id: sauceId}, { $push: {usersLiked: userId}, $inc: {likes: +1}})
@@ -123,4 +124,6 @@ exports.likeCreate = (req, res, next) => {
             })
             .catch(error => {res.status(404).json({ error })})
     };
+    
 }
+

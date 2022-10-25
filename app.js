@@ -3,6 +3,11 @@ const express = require("express");
 
 const mongoose = require("mongoose");
 
+//protection des variables d'environnement
+const dotenv = require('dotenv').config();
+console.log(dotenv)
+
+
 const userRoutes = require("./routes/userRouter");
 const sauceRoutes = require("./routes/sauceRoutes");
 const path = require('path');
@@ -10,7 +15,7 @@ const path = require('path');
 const app = express();
 
 //connection avec la base de données
-mongoose.connect('mongodb+srv://franky:Frankyvan95@saucepiquante.zlptadq.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect(process.env.DB_CONNECTION, 
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
